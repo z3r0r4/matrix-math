@@ -1,3 +1,4 @@
+package zeroMath;
 
 public class Main {
 	/*
@@ -13,14 +14,5 @@ public class Main {
 		 Matrix.printM(B);
 		 A.add(B);
 		 Matrix.printM(A);
-		
-//TODO mapping lambda Function 
-		 //sigmoid or something like thathahthathhath
-		 //gauﬂ
-		 //determinatnete
-		 //lineare abb und unabbh‰ngigigidfigidfig
-		 //invers matrix
-		 //vectors with base 
-		 //3d graphics
 	}
 }

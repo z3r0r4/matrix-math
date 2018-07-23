@@ -1,1 +1,1 @@
-typeSearchIndex = [{"p":"<Unnamed>","l":"Matrix"}]
+typeSearchIndex = [{"p":"zeroMath","l":"Matrix"}]

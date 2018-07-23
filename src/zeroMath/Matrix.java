@@ -1,3 +1,5 @@
+package zeroMath;
+
 import java.util.Arrays;
 
 //Project Matrix-Math-javadoc
@@ -107,6 +109,17 @@ public class Matrix {
 		// this.data = another.data.clone(); //doesn't work
 		this.rows = another.rows;
 		this.columns = another.columns;
+	}
+
+	/**
+	 * Copies all attributes of the current instance and returns it as a new
+	 * instance
+	 * 
+	 * @return a new instance of the Matrix class with the same attributes as the
+	 *         one on which the method was invoked
+	 */
+	public Matrix copy() {
+		return new Matrix(this);
 	}
 
 	public static Matrix fromArray(double A[][]) {
