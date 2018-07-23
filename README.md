@@ -1,6 +1,6 @@
-# matrix-math
-A Java Matrix Math Library
-
+﻿# matrix-math
+A Java Matrix Math Library<br>
+credit to [AvoLord](https://github.com/Avolord) and his [JavaScript Matrix Library](https://github.com/Avolord/AvoMatrix) for providing some inspiration
 ## Documentation
 You can find the Javadoc Documentation [here](https://z3r0r4.github.io/matrix-math/Matrix.html)<br>
 Or you can find all the raw Javadoc comments [converted](https://delight-im.github.io/Javadoc-to-Markdown) to Markdown in this README.md.
