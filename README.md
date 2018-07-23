@@ -2,6 +2,8 @@
 A Java Matrix Math Library
 
 ## Documentation
+You can find the Javadoc Documentation [here](https://z3r0r4.github.io/matrix-math/Matrix.html)<br>
+Or you can find all the raw Javadoc comments [converted](https://delight-im.github.io/Javadoc-to-Markdown) to Markdown in this README.md.
 
 ### `public class Matrix`
 
@@ -15,12 +17,8 @@ A Java Matrix Math Library
 ### `private int rows, columns`
 
  * **Parameters:**
-   * `rows` — Variable that holds the number of rows of the Matrix, also called
-
-     'm', running variable 'i'
-   * `columns` — Variable that holds the number of columns of the Matrix, also
-
-     called 'n', running variable 'j'
+   * `rows` — Variable that holds the number of rows of the Matrix, also called 'm', running variable 'i'
+   * `columns` — Variable that holds the number of columns of the Matrix, also called 'n', running variable 'j'
 
 ### `public Matrix(int m, int n)`
 
