@@ -5,11 +5,9 @@ import java.util.Arrays;
 //Project Matrix-Math-javadoc
 /**
  * @author Z3R0R4
- * @version 0.1
+ * @version 0.1-alpha.6
  * @description Class for Matrices and applicable operations<br>
- *              no getters or setters yet<br>
- *              "https://stackoverflow.com/questions/1568091/why-use-getters-and-setters-accessors"
- *              Why can they never agree on anything...
+ *              no setters for Rows and Columns
  */
 public class Matrix {
 	/**
@@ -109,6 +107,24 @@ public class Matrix {
 		// this.data = another.data.clone(); //doesn't work
 		this.rows = another.rows;
 		this.columns = another.columns;
+	}
+
+	/**
+	 * Returns the Number of Rows of the instance on which it was invoked
+	 * 
+	 * @return Number of Rows
+	 */
+	public int getRows() {
+		return this.rows;
+	}
+
+	/**
+	 * Returns the Number of Columns of the instance on which it was invoked
+	 * 
+	 * @return Number of Columns
+	 */
+	public int getColumns() {
+		return this.columns;
 	}
 
 	/**
