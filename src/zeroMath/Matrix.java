@@ -5,9 +5,9 @@ import java.util.Arrays;
 //Project Matrix-Math-javadoc
 /**
  * @author Z3R0R4
- * @version 0.1-alpha.6
+ * @version 0.1-alpha.9
  * @description Class for Matrices and applicable operations<br>
- *              no setters for Rows and Columns
+ *              added various getters and setters /note maybe rethink the overwriting part in nonstatic methodes(make them return something)
  */
 public class Matrix {
 	/**
@@ -37,7 +37,7 @@ public class Matrix {
 	public Matrix(int m, int n) {
 		this.rows = (m != 0) ? m : 3;
 		this.columns = (n != 0) ? n : 3;
-		System.out.println("Generating " + rows + "x" + columns + " Matrix filled with 0");
+		System.out.println("	Generating " + rows + "x" + columns + " Matrix filled with 0");
 		this.data = new double[rows][columns];
 		randomfill(0, 0);
 	}
@@ -54,7 +54,7 @@ public class Matrix {
 	 *            Number on the diagonal
 	 */
 	public Matrix(int m, int n, double diagfill) {
-		System.out.println("Creating Diagonal Matrix");
+		System.out.println("	Creating Diagonal Matrix");
 		// if (m != n)
 		// throw new IllegalArgumentException("rows=/=columns : only Square Matrices can
 		// be Diagonal Matrices");
@@ -84,7 +84,7 @@ public class Matrix {
 	public Matrix(int m, int n, float low, float high) {
 		this.rows = (m != 0) ? m : 3;
 		this.columns = (n != 0) ? n : 3;
-		System.out.println("Generating " + rows + "x" + columns + " Matrix filled with random Numbers");
+		System.out.println("	Generating " + rows + "x" + columns + " Matrix filled with random Numbers");
 		this.data = new double[rows][columns];
 		randomfill(low, high);
 	}
@@ -102,11 +102,31 @@ public class Matrix {
 	public Matrix(Matrix another) {
 		this.data = new double[another.rows][another.columns];
 		for (int i = 0; i < another.data.length; i++)
-			for (int j = 0; j < another.data[1].length; j++)
+			for (int j = 0; j < another.data[0].length; j++)
 				this.data[i][j] = another.data[i][j];
 		// this.data = another.data.clone(); //doesn't work
 		this.rows = another.rows;
 		this.columns = another.columns;
+	}
+
+	public double[][] getData() {
+		return this.data;
+	}
+
+	public double getData(int i, int j) {
+		return this.data[i][j];
+	}
+
+	public void setData(double[][] aData) {
+		if (data.length != aData.length || data[0].length != aData[0].length)
+			throw new IllegalArgumentException("Not a vaild DataArray");
+		this.data = aData;
+	}
+
+	public void setData(double aDatapoint, int i, int j) {
+		if (i >= data.length || j >= data[0].length)
+			throw new IllegalArgumentException("Not a vaild Datapoint");
+		this.data[i][j] = aDatapoint;
 	}
 
 	/**
