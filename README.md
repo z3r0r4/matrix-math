@@ -1,4 +1,4 @@
-﻿# matrix-math
+﻿# matrix-math.clean
 A Java Matrix Math Library<br>
 credit to [AvoLord](https://github.com/Avolord) and his [JavaScript Matrix Library](https://github.com/Avolord/AvoMatrix) for providing some inspiration
 ## Documentation
