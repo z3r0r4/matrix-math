@@ -5,10 +5,13 @@ credit to [AvoLord](https://github.com/Avolord) and his [JavaScript Matrix Libra
 You can find the Javadoc Documentation [here](https://z3r0r4.github.io/matrix-math/Matrix.html)<br>
 Or you can find all the raw Javadoc comments [converted](https://delight-im.github.io/Javadoc-to-Markdown) to Markdown in this README.md.
 
+
+## Documentation
+
 ### `public class Matrix`
 
  * **Author:** Z3R0R4
- * **Version:** 0.1
+ * **Version:** 0.1-gamma.1
 
 ### `private double data[][]`
 
@@ -17,8 +20,12 @@ Or you can find all the raw Javadoc comments [converted](https://delight-im.gith
 ### `private int rows, columns`
 
  * **Parameters:**
-   * `rows` — Variable that holds the number of rows of the Matrix, also called 'm', running variable 'i'
-   * `columns` — Variable that holds the number of columns of the Matrix, also called 'n', running variable 'j'
+   * `rows` — Variable that holds the number of rows of the Matrix, also called
+
+     'm', running variable 'i'
+   * `columns` — Variable that holds the number of columns of the Matrix, also
+
+     called 'n', running variable 'j'
 
 ### `public Matrix(int m, int n)`
 
@@ -49,17 +56,89 @@ Creates an instance of the Matrix class filled with random numbers of an given i
 
 ### `public Matrix(Matrix another)`
 
-Copy Constructor for duplication of Matrices <br> http://www.javapractices.com/topic/TopicAction.do?Id=12 <br> // Matrix Alpha = new Matrix(0,0,1,10); <br> // Matrix Beta = new Matrix(Alpha); //use this to create a copy <br> // Matrix Gamma = Alpha; //this copies the reference don't use it
+Copy Constructor for duplication of Matrices
 
  * **Parameters:** `another` — instance Matrix to be copied
 
-### `private void randomfill(float low, float high)`
+### `public double[][] getData()`
+
+Returns the Data or the Matrix of the Object it was called upon
+
+ * **Returns:** 2D-Double Array holding all the components of the Matrix
+
+     <p>
+
+### `public double getData(int i, int j)`
+
+Returns the Matrix component with the coordinates i,j
+
+ * **Parameters:**
+   * `i` — index of row in which the value is found
+   * `j` — index of column in which the value is found
+
+### `public void setData(double[][] aData)`
+
+Sets the Data of the Matrix (all components) to new values determined by the given Array
+
+ * **Parameters:** `aData` — double 2D-Array of fitting length
+
+### `public void setData(double aDatapoint, int i, int j)`
+
+Sets the Matrix component with the coordinates i,j to the specified data value
+
+ * **Parameters:**
+   * `aDatapoint` — value which the component shall be set to
+   * `i` — index of row in which the value is found
+   * `j` — index of column in which the value is found
+
+### `public int getRows()`
+
+Returns the Number of Rows of the instance on which it was invoked
+
+ * **Returns:** Number of Rows
+
+### `public int getColumns()`
+
+Returns the Number of Columns of the instance on which it was invoked
+
+ * **Returns:** Number of Columns
+
+### `public void info(Object c)`
+
+(EXPERIMENTAL) Prints information about the Object invoked on to the console
+
+ * **Parameters:** `c` — modifier for verbosity
+
+### `public Matrix copy()`
+
+Copies all attributes of the current instance and returns it as a new instance
+
+ * **Returns:** a new instance of the Matrix class with the same attributes as the
+
+     one on which the method was invoked
+
+### `public static Matrix fromArray(double A[][])`
+
+creates and returns an Matrix Object containing the values specified in the given Array
+
+ * **Parameters:** `A` — 2D-Double Array which holds the components of the new Matrix
+ * **Returns:** an new Matrix Object containing the data of the Array
+
+### `private void randomfill(double min, double max)`
 
 Fills the Matrix of the current instance with random numbers
 
  * **Parameters:**
    * `low` — lower bound of randomness reach
    * `high` — upper bound of randomness reach
+
+### `public String toString_auto()`
+
+by AvoLord
+
+### `public static Matrix fromString(String matrix)`
+
+by AvoLord
 
 ### `public static void printM(Matrix A)`
 
@@ -73,7 +152,7 @@ Prints a Matrix M to the console as an Array for debugging
 
  * **Parameters:** `A` — instance of Matrix which data is to be printed
 
-### `public static Matrix transpose(Matrix A)`
+### `public static Matrix T(Matrix A)`
 
 Creates a transposed version of a Matrix
 
