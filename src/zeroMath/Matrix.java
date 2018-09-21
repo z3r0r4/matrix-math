@@ -5,11 +5,11 @@ import java.util.Arrays;
 //Project Matrix-Math-javadoc
 /**
  * @author Z3R0R4
- * @version 0.1-beta.1
+ * @version 0.1-beta.5
  * @description Class for Matrices and applicable operations<br>
- *              added various getters and setters /note maybe rethink the
+ *            	maybe rethink the
  *              overwriting part in nonstatic methodes(make them return
- *              something) maybe add name variable(also in info())
+ *              something), maybe add name variable(also in info())
  */
 public class Matrix {
 	/**
@@ -35,13 +35,11 @@ public class Matrix {
 	 * @param n
 	 *            Number of columns of the new Matrix
 	 */
-
 	public Matrix(int m, int n) {
 		this.rows = (m != 0) ? m : 3;
 		this.columns = (n != 0) ? n : 3;
 		// System.out.println(" Generating " + rows + "x" + columns + " Matrix filled with 0");
 		this.data = new double[rows][columns];
-		randomfill(0, 0);
 	}
 
 	/**
@@ -57,15 +55,15 @@ public class Matrix {
 	 */
 	public Matrix(int m, int n, double diagfill) {
 		// System.out.println(" Creating Diagonal Matrix");
-		// if (m != n)
-		// throw new IllegalArgumentException("rows=/=columns : only Square Matrices can be Diagonal Matrices");
+		 if (m != n)
+		 throw new IllegalArgumentException("rows=/=columns : only Square Matrices can be Diagonal Matrices");
 
 		this.rows = (m != 0) ? m : 3;
 		this.columns = (n != 0) ? n : 3;
 		this.data = new double[rows][columns];
-		randomfill(0, 0);
+
 		for (int i = 0; i < rows && i < columns; i++) // && i< M.columns
-			this.data[i][i] = diagfill;
+		this.data[i][i] = diagfill;
 
 	}
 
@@ -85,17 +83,12 @@ public class Matrix {
 	public Matrix(int m, int n, float low, float high) {
 		this.rows = (m > 0) ? m : 3;
 		this.columns = (n > 0) ? n : 3;
-		// System.out.println(" Generating " + rows + "x" + columns + " Matrix filled with random Numbers");
 		this.data = new double[rows][columns];
-		randomfill(low, high);
+		this.randomfill(low, high);
 	}
 
 	/**
-	 * Copy Constructor for duplication of Matrices <br>
-	 * http://www.javapractices.com/topic/TopicAction.do?Id=12 <br>
-	 * // Matrix Alpha = new Matrix(0,0,1,10); <br>
-	 * // Matrix Beta = new Matrix(Alpha); //use this to create a copy <br>
-	 * // Matrix Gamma = Alpha; //this copies the reference don't use it
+	 * Copy Constructor for duplication of Matrices
 	 * 
 	 * @param another
 	 *            instance Matrix to be copied
@@ -194,7 +187,6 @@ public class Matrix {
 			System.out.printf("rows=%d & colums=%d & data=%s \n", this.rows, this.columns,
 					Arrays.deepToString(this.data));
 		}
-
 	}
 
 	/**
@@ -206,6 +198,15 @@ public class Matrix {
 	 */
 	public Matrix copy() {
 		return new Matrix(this);
+	}
+
+	public static double[] toArray_flat(Matrix A) {
+		double[] result = new double[A.getRows() * A.getColumns()];
+		for (int i = 0; i < A.getRows(); i++)
+			for (int j = 0; j < A.getColumns(); j++)
+				result[i * A.getColumns() + j] = A.getData(i, j);
+
+		return result;
 	}
 
 	/**
@@ -227,6 +228,14 @@ public class Matrix {
 		return B;
 	}
 
+	public static Matrix fromArray(double[] arr) {
+		Matrix result = new Matrix(arr.length, 1);
+		for (int i = 0; i < arr.length; i++) {
+			result.data[i][0] = arr[i];
+		}
+		return result;
+	}
+
 	/**
 	 * Fills the Matrix of the current instance with random numbers
 	 * 
@@ -235,11 +244,41 @@ public class Matrix {
 	 * @param high
 	 *            upper bound of randomness reach
 	 */
-	private void randomfill(float low, float high) {
+	
+	private void randomfill(double min, double max) {
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < columns; j++)
-				data[i][j] = low + Math.random() * 2 - 1;
-		;
+				data[i][j] = min + Math.random() * (max - min);
+	}
+	/**
+	 * by AvoLord
+	 * */
+	public String toString_auto() { //Not easy readable for the user
+		String result = rows+";"+columns+";";
+		for(int i=0;i<data.length;i++) {
+			result = (i == 0) ? result : result.concat("-");
+			for(int j=0;j<data[i].length;j++) {
+					result = (j==0) ? 
+							result.concat(""+data[i][j]) : 
+							result.concat(","+data[i][j]);
+			}
+		}
+		return result;
+	}
+	/**
+	 * by AvoLord
+	 * */
+	public static Matrix fromString(String matrix) {
+		String[] mat = matrix.split(";");
+		String[] rws = mat[2].split("-");
+		
+		Matrix result = new Matrix(Integer.parseInt(mat[0]),Integer.parseInt(mat[1]),0);
+		for(int i=0; i<result.rows; i++) {
+
+			String[] res = rws[i].split(",");			
+		    Arrays.setAll(result.data[i], k -> Double.parseDouble(res[k]));	
+		}
+		return result;
 	}
 
 	/**
@@ -271,7 +310,7 @@ public class Matrix {
 	 *            instance of Matrix to be transposed
 	 * @return transposed Matrix as instance of the Matrix class
 	 */
-	public static Matrix transpose(Matrix A) {
+	public static Matrix T(Matrix A) {
 		// System.out.println("Transposing Statically: " + A.data + " ^T");
 		Matrix B = new Matrix(A.columns, A.rows);
 		for (int i = 0; i < B.rows; i++)
