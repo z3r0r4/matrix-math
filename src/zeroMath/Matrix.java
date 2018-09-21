@@ -217,11 +217,12 @@ public class Matrix {
 	 * @return an new Matrix Object containing the data of the Array
 	 */
 	public static Matrix fromArray(double A[][]) {
-		for (int i = 0; i < A.length - 1; i++)
-			for (int j = i + 1; j < A.length; j++)
-				if (A[i].length != A[j].length || A[i].length == 0)
-					throw new IllegalArgumentException("Not a vaild Array");
-		Matrix B = new Matrix(A.length, A[1].length);
+		if (A.length > 1)
+			for (int i = 0; i < A.length - 1; i++)
+				for (int j = i + 1; j < A.length; j++)
+					if (A[i].length != A[j].length || A[i].length == 0)
+						throw new IllegalArgumentException("Not a vaild Array");
+		Matrix B = new Matrix(A.length, A[0].length);
 		B.data = A;
 		return B;
 	}
@@ -237,7 +238,8 @@ public class Matrix {
 	private void randomfill(float low, float high) {
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < columns; j++)
-				data[i][j] = (int) (Math.random() * high + low);
+				data[i][j] = low + Math.random() * 2 - 1;
+		;
 	}
 
 	/**
@@ -367,6 +369,13 @@ public class Matrix {
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < columns; j++)
 				data[i][j] *= scalar;
+	}
+
+	public Matrix add(double scalar) { //this is what the non static methodes should look like
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < columns; j++)
+				data[i][j] += scalar;
+		return this;
 	}
 
 	/**
