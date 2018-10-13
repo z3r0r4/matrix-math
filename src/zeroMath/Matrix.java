@@ -1,4 +1,4 @@
-package zeroMath;
+package zeroComputation;
 
 import java.util.Arrays;
 
@@ -7,9 +7,8 @@ import java.util.Arrays;
  * @author Z3R0R4
  * @version 0.1-beta.5
  * @description Class for Matrices and applicable operations<br>
- *            	maybe rethink the
- *              overwriting part in nonstatic methodes(make them return
- *              something), maybe add name variable(also in info())
+ *              maybe rethink the overwriting part in nonstatic methodes(make
+ *              them return something), maybe add name variable(also in info())
  */
 public class Matrix {
 	/**
@@ -55,15 +54,15 @@ public class Matrix {
 	 */
 	public Matrix(int m, int n, double diagfill) {
 		// System.out.println(" Creating Diagonal Matrix");
-		 if (m != n)
-		 throw new IllegalArgumentException("rows=/=columns : only Square Matrices can be Diagonal Matrices");
+		if (m != n)
+			throw new IllegalArgumentException("rows=/=columns : only Square Matrices can be Diagonal Matrices");
 
 		this.rows = (m != 0) ? m : 3;
 		this.columns = (n != 0) ? n : 3;
 		this.data = new double[rows][columns];
 
 		for (int i = 0; i < rows && i < columns; i++) // && i< M.columns
-		this.data[i][i] = diagfill;
+			this.data[i][i] = diagfill;
 
 	}
 
@@ -193,26 +192,28 @@ public class Matrix {
 	 * Copies all attributes of the current instance and returns it as a new
 	 * instance
 	 * 
-	 * @return a new instance of the Matrix class with the same attributes as the
-	 *         one on which the method was invoked
+	 * @return Instance of Matrix with the same data as the one the Method was
+	 *         invoked on
 	 */
 	public Matrix copy() {
 		return new Matrix(this);
 	}
-
+/**
+ * returns all rows of the Matrix concatenated as an double[] array
+ * @param A Matrix which shall be turned into a array
+ * @return double[] array containing all the lines of the Matrix
+ */
 	public static double[] toArray_flat(Matrix A) {
 		double[] result = new double[A.getRows() * A.getColumns()];
 		for (int i = 0; i < A.getRows(); i++)
 			for (int j = 0; j < A.getColumns(); j++)
 				result[i * A.getColumns() + j] = A.getData(i, j);
-
 		return result;
 	}
 
 	/**
-	 * creates and returns an Matrix Object containing the values specified in the
+	 * returns an Matrix containing the values specified in the
 	 * given Array
-	 * 
 	 * @param A
 	 *            2D-Double Array which holds the components of the new Matrix
 	 * @return an new Matrix Object containing the data of the Array
@@ -227,11 +228,15 @@ public class Matrix {
 		B.data = A;
 		return B;
 	}
-
-	public static Matrix fromArray(double[] arr) {
-		Matrix result = new Matrix(arr.length, 1);
-		for (int i = 0; i < arr.length; i++) {
-			result.data[i][0] = arr[i];
+	/**
+	 * 
+	 * @param a
+	 * @return
+	 */
+	public static Matrix fromArray(double[] a) {
+		Matrix result = new Matrix(a.length, 1);
+		for (int i = 0; i < a.length; i++) {
+			result.data[i][0] = a[i];
 		}
 		return result;
 	}
@@ -244,39 +249,39 @@ public class Matrix {
 	 * @param high
 	 *            upper bound of randomness reach
 	 */
-	
+
 	private void randomfill(double min, double max) {
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < columns; j++)
 				data[i][j] = min + Math.random() * (max - min);
 	}
+
 	/**
 	 * by AvoLord
-	 * */
+	 */
 	public String toString_auto() { //Not easy readable for the user
-		String result = rows+";"+columns+";";
-		for(int i=0;i<data.length;i++) {
+		String result = rows + ";" + columns + ";";
+		for (int i = 0; i < data.length; i++) {
 			result = (i == 0) ? result : result.concat("-");
-			for(int j=0;j<data[i].length;j++) {
-					result = (j==0) ? 
-							result.concat(""+data[i][j]) : 
-							result.concat(","+data[i][j]);
+			for (int j = 0; j < data[i].length; j++) {
+				result = (j == 0) ? result.concat("" + data[i][j]) : result.concat("," + data[i][j]);
 			}
 		}
 		return result;
 	}
+
 	/**
 	 * by AvoLord
-	 * */
+	 */
 	public static Matrix fromString(String matrix) {
 		String[] mat = matrix.split(";");
 		String[] rws = mat[2].split("-");
-		
-		Matrix result = new Matrix(Integer.parseInt(mat[0]),Integer.parseInt(mat[1]),0);
-		for(int i=0; i<result.rows; i++) {
 
-			String[] res = rws[i].split(",");			
-		    Arrays.setAll(result.data[i], k -> Double.parseDouble(res[k]));	
+		Matrix result = new Matrix(Integer.parseInt(mat[0]), Integer.parseInt(mat[1]), 0);
+		for (int i = 0; i < result.rows; i++) {
+
+			String[] res = rws[i].split(",");
+			Arrays.setAll(result.data[i], k -> Double.parseDouble(res[k]));
 		}
 		return result;
 	}
